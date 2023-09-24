@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Add Tweet Content Deneme 1</h2>
+
+<form action="" method="POST">
+    {% csrf_token %}   <!--guvelik icin bir kod-->
+    <div class="mb-3">
+      <label for="nickname" class="form-label">Nickname</label>
+      <input type="text" class="form-control" id="nickname" name="nickname"> <!--name leri vermemizin nedeni terminalde gonderilen bilgiiy gostermesi-->
+      </div>
+    <div class="mb-3">
+      <label for="message" class="form-label">Message</label>
+      <input type="text" class="form-control" id="message" name="message"> <!--name leri vermemizin nedeni terminalde gonderilen bilgiiy gostermesi-->
+    </div>
+    <button type="submit" class="btn btn-primary">Sent Tweet</button>
+  </form>
+
+{% endblock %}

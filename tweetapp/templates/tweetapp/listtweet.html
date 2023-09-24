@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>List Tweet content deneme 1</h1>
+
+<ul>
+    {% for tweet in tweets %}
+        <!--<li>{{ tweet }}</li>-->
+        <li><h2>{{ tweet.nickname }} says: {{ tweet.message }}</h2></li>
+    {% endfor %}
+</ul>
+{% endblock %}
