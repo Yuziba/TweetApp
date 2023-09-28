@@ -2,13 +2,11 @@
 {% load static%}                    <!--Static altindaki olusturulan dosyalara erisiim-->
                                     <!--Setting dosyasinda en altta static url -->
 {% block content %}
-<h2>Add Tweet by FORM Content Deneme 1</h2>
+<h2>Add Tweet by MODEL FORM Content Deneme 1</h2>
 
 <div class="container tweetform">
     <form action="" method="POST">
-        {% csrf_token %}                <!--guvelik icin bir kod-->
-        
-        <!--{{ form }}                     bu sekilde kabaca gorunebilir      -->
+        {% csrf_token %}
         {% for field in form %}
             <div class="mb-3"> 
                 {{field.label_tag}}
@@ -18,5 +16,6 @@
         <button type="submit" class="btn btn-primary">Sent Tweet</button>
     </form>
 </div>
+
 
 {% endblock %}

@@ -58,3 +58,23 @@ def addtweetbyform(request):
     else:
         form = forms.AddTweetForm() #formumu olusturduk
         return render (request,'tweetapp/addtweetbyform.html', context={"form":form}) #contect ile ustte olustutrlan formu dict formatinda ilettik
+
+
+
+def addtweetbymodelform(request):
+    if request.method == "POST":
+        form = forms.AddTweetModelForm(request.POST)
+        if form.is_valid():
+            nickname = form.cleaned_data["nickname"]
+            message = form.cleaned_data["message"]
+            models.Tweet.objects.create(nickname=nickname, message=message)
+            return redirect(reverse('tweetapp:listtweet'))
+        else:
+            print("Error in model form")
+            return render (request,'tweetapp/addtweetbymodelform.html', context={"form":form}) 
+    else:
+        form = forms.AddTweetModelForm() #formumu olusturduk
+        return render (request,'tweetapp/addtweetbymodelform.html', context={"form":form}) 
+
+
+
