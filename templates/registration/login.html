@@ -1,0 +1,54 @@
+<!-- ** yorum 1**
+   templates altinda registration icinde olusturduk. cunku django dokumantasyonuna bu sekilde uygun oluyr
+   yani django bu sekilde yaptigimzda url leri otomatik olusturuyor 
+
+   settings. py soyasina gidip en alt kisma (DEFAULT_AUTO.. altina) LOGIN_URL="" ve LOGIN_REDIRECT_URL="" yazdik.
+   LOGIN_REDIRECT_URL --- > Kullanici giris yaptiginda nereye yonlendirecegimizi belirtir
+   Anasayfaya yonlendirmel istiyorsak ( bi slash )
+
+-->
+
+{% extends "base.html" %}
+{% block content %}
+    <!-- **yorum 4 **
+        Kullanicinin giris yapip yapilmadigi ilk olarak kontrol edilmelidir
+    -->
+    {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <h2 style="padding: 10px;">Welcome {{ user.username }}</h2>
+
+    {% else %}
+        
+        <form method="POST" action="{% url 'login' %}"> <!-- ** yorum 3** Butonun post yapmasi icin action tanimladik--> 
+            <div class="container" style="width: 60%;">
+                {% csrf_token %}
+                    {% for field in form %}
+                    <div class="card" style="padding:10px">
+                
+                        <div class="mb-3" style="width: 60%;">
+                            <h4>{{ field.label_tag}} </h4>
+                        
+                            <p class="card-text">{{ field }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+                
+
+
+                <button type="submit" class="btn btn-primary">Login</button>  <!-- **yorum 2** super user bilgileri ile giris yapilabilir--> 
+            </div>
+
+            
+        </form>
+        
+
+    {% endif %}
+
+{% endblock %}
+
+

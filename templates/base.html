@@ -25,11 +25,25 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'tweetapp:addtweet' %}">Add Tweet</a>
               </li>
-              <li class="nav-item">
+              <!--
+                <li class="nav-item">
                 <a class="nav-link" href="{% url 'tweetapp:addtweetbyform' %}">Add Tweet by Form</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'tweetapp:addtweetbymodelform' %}">Add Tweet by MODELForm</a>
+              </li>
+              -->
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>  <!--twettapp: diye yazmadik cunku urls kismini app url vermedik
+                cunku kullanici bilgileri baska app ler olsa bile tek olur-->
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}?next=/">Logout</a> <!-- Burda cikis isleminden sonra next komutu ile 
+                anasayfaya yonlendirme yaptik-->
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'tweetapp:signup' %}">Sing Up</a> 
               </li>
             </ul>
            </div>

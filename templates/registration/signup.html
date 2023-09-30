@@ -1,0 +1,32 @@
+<!-- ** yorum 1**
+   templates altinda registration icinde olusturduk. cunku django dokumantasyonuna bu sekilde uygun oluyr
+   yani django bu sekilde yaptigimzda url leri otomatik olusturuyor 
+
+-->
+
+{% extends "base.html" %}
+{% block content %}
+
+    <form method="POST" action=""> <!-- ** yorum 3** Butonun post yapmasi icin action tanimladik--> 
+            <div class="container" style="width: 60%;">
+                {% csrf_token %}
+                    {% for field in form %}
+                    <div class="card" style="padding:10px">
+                
+                        <div class="mb-3" style="width: 60%;">
+                            <h4>{{ field.label_tag}} </h4>
+                        
+                            <p class="card-text">{{ field }}</p>
+                        </div>
+                    </div>
+                {% endfor %}            
+
+
+                <button type="submit" class="btn btn-primary" value="signup">Sinup</button>  <!-- **yorum 2** super user bilgileri ile giris yapilabilir--> 
+            </div>            
+        </form>
+   
+
+{% endblock %}
+
+

@@ -1,9 +1,10 @@
 from django.shortcuts import render,redirect
 from . import models
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from . import forms
-
-
+from django.contrib.auth.decorators import login_required #--kullanici giris yapti mi bakar
+from django.contrib.auth.forms import UserCreationForm      #-- Kullanici olusturma (sing up)
+from django.views.generic import CreateView                 #-- Kullanici olusturma (sing up)
 
 # Create your views here.
 def listtweet(request):
@@ -11,6 +12,7 @@ def listtweet(request):
     tweet_dict = {"tweets": all_tweets}
     return render(request, 'tweetapp/listtweet.html', context=tweet_dict)
 
+@login_required(login_url="/login") #giris yapmayan addtweet kismini goremeyecek
 def addtweet(request):
     # birinci veri alma yontemi
     """print(request.POST)  """   # formda gonderilen bilgiyi almak icin (terminalde gosterir)
@@ -76,5 +78,15 @@ def addtweetbymodelform(request):
         form = forms.AddTweetModelForm() #formumu olusturduk
         return render (request,'tweetapp/addtweetbymodelform.html', context={"form":form}) 
 
+
+
+
+
+class SignUpView(CreateView):   #-- Yukarida import ettigimiz createview den inherit eder
+    form_class = UserCreationForm   # bu satiri tam olarak bu sekilde yazmamiz gerek. tanimli cunku. usercreatinonfrom dan import ederiz
+    # success_url = reverse("login")  bununlada yapsak olurdu ama uygulama her baslatildiginda bu reverse calisacak ve 
+    # sistemi yoracak. lazy ile sadece bu kayit ekrani acilirsa calisacak
+    success_url = reverse_lazy("login")  # UserCreationForm'dan basarili olursa hangi url ye gidecegini belirtmek icin
+    template_name = "registration/signup.html"  # hangi template ye bagli olacak 
 
 
