@@ -26,7 +26,7 @@ def addtweet(request):
 
     # ucuncu yol
     if request.POST:
-        nickname = request.POST["nickname"]
+        #nickname = request.POST["nickname"]
         message = request.POST["message"]
         #yol_1 DATABASE'e kaydetme
         """
@@ -35,7 +35,8 @@ def addtweet(request):
         """
 
         #yol_2 DATABASE'e kaydetme
-        models.Tweet.objects.create(nickname=nickname, message=message)
+        # models.Tweet.objects.create(nickname=nickname, message=message)
+        models.Tweet.objects.create(username=request.user, message=message)
         return redirect(reverse('tweetapp:listtweet'))  #database'e kayit yapildiktan sonra listeme ekranina yonlendirme yaptik
         #ama ust kisma alttaki import islemlerini yazdik
         #from django.shortcuts import render,redirect
@@ -80,8 +81,6 @@ def addtweetbymodelform(request):
 
 
 
-
-
 class SignUpView(CreateView):   #-- Yukarida import ettigimiz createview den inherit eder
     form_class = UserCreationForm   # bu satiri tam olarak bu sekilde yazmamiz gerek. tanimli cunku. usercreatinonfrom dan import ederiz
     # success_url = reverse("login")  bununlada yapsak olurdu ama uygulama her baslatildiginda bu reverse calisacak ve 
@@ -90,3 +89,11 @@ class SignUpView(CreateView):   #-- Yukarida import ettigimiz createview den inh
     template_name = "registration/signup.html"  # hangi template ye bagli olacak 
 
 
+@login_required
+def deletetweet(request, id):
+    tweet = models.Tweet.objects.get(pk=id)  #tek bi tweet i alma - primary key i di  ye esitledik
+    if request.user == tweet.username:  #bu sorgu guvenlik icin
+        models.Tweet.objects.filter(id=id).delete()
+        return redirect('tweetapp:listtweet')
+    
+    # url e gidip ekleme yaptik

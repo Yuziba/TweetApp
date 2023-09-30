@@ -6,10 +6,16 @@
 <form action="" method="POST">
     {% csrf_token %}   <!--guvelik icin bir kod-->
     <div class="container" style="width: 60%;">
-      <div class="mb-3">
+
+
+
+      <!--name leri vermemizin nedeni terminalde gonderilen bilgiiy gostermesi-->
+      <!--<div class="mb-3">
         <label for="nickname" class="form-label">Nickname</label>
-        <input type="text" class="form-control" id="nickname" name="nickname"> <!--name leri vermemizin nedeni terminalde gonderilen bilgiiy gostermesi-->
-        </div>
+        <input type="text" class="form-control" id="nickname" name="nickname"> 
+      </div> 
+    -->
+      
       <div class="mb-3">
         <label for="message" class="form-label">Message</label>
         <input type="text" class="form-control" id="message" name="message"> <!--name leri vermemizin nedeni terminalde gonderilen bilgiiy gostermesi-->
